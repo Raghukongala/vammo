@@ -1,20 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: banking-app
+  name: banking-scheduler
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: banking-app
+      app: banking
   template:
     metadata:
       labels:
-        app: banking-app
+        app: banking
     spec:
       containers:
-      - name: banking-app
-        image: banking-app
-        imagePullPolicy: Never
+      - name: banking-container
+        image: raghu282/banking-scheduler:v1
         ports:
         - containerPort: 5000
