@@ -1,11 +1,9 @@
-FROM python:3.9
+FROM python:3.13-slim
 
-WORKDIR /app
+# Patch openssl - fixes CVE-2025-15467 (CRITICAL), CVE-2025-69419, CVE-2025-69421 (HIGH)
+RUN apt-get update && \
+    apt-get upgrade -y openssl && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-
-RUN pip install -r requirements.txt
-
-COPY . .
-
-CMD ["python","app.py"]
+# rest of your existing Dockerfile below...
