@@ -1,10 +1,11 @@
-from flask import Flask
+cd /var/lib/jenkins/workspace/vammo
 
-app = Flask(__name__)
+# Change port to 80
+sed -i 's/port=5000/port=80/' app.py
 
-@app.route("/")
-def hello():
-    return "Banking Scheduler raghukongala Running"
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+# Push to GitHub
+git config user.email "devops@vammo.com"
+git config user.name "DevOps"
+git add app.py
+git commit -m "Fix: change Flask port to 80 for ECS"
+git push origin main
