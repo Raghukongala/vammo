@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: banking-scheduler
+  name: vammo-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: banking
+      app: vammo
   template:
     metadata:
       labels:
-        app: banking
+        app: vammo
     spec:
       containers:
-      - name: banking-container
-        image: raghu282/banking-scheduler:v1
+      - name: vammo
+        image: 796796207873.dkr.ecr.ap-south-1.amazonaws.com/vammo-app:latest
         ports:
         - containerPort: 5000
