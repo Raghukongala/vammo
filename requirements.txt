@@ -1,1 +1,5 @@
-flask
+flask==3.1.0
+# add any other imports your app.py uses, for example:
+# gunicorn==23.0.0
+# requests==2.32.3
+# sqlalchemy==2.0.36
