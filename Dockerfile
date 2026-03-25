@@ -6,14 +6,19 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Prevent Python from buffering logs (critical for CloudWatch)
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
 # Set working directory
 WORKDIR /app
 
-# Copy application files
-COPY . .
+# Copy and install dependencies first (layer caching)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN pip install flask
+# Copy only application code
+COPY app.py .
 
 # Expose application port
 EXPOSE 5000
